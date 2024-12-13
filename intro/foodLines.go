@@ -3,21 +3,23 @@ package intro
 import "fmt"
 
 func findShortestLineIndex(lines []int) int {
-	shortest := 0
+	shortestIndex := 0
 	for j := 1; j < len(lines); j++ {
-		if lines[j] < lines[shortest] {
-			shortest = j
+		if lines[j] < lines[shortestIndex] {
+			shortestIndex = j
 		}
 	}
-	return shortest
+	return shortestIndex
 }
 
-func solve(lines []int, m int) {
+func solve(lines []int, m int) []int {
+	results := make([]int, m)
 	for i := 0; i < m; i++ {
-		shortest := findShortestLineIndex(lines)
-		fmt.Println(lines[shortest])
-		lines[shortest]++
+		shortestIndex := findShortestLineIndex(lines)
+		results[i] = lines[shortestIndex]
+		lines[shortestIndex]++
 	}
+	return results
 }
 
 func Solution() {
@@ -36,5 +38,8 @@ func Solution() {
 			return
 		}
 	}
-	solve(lines, m)
+	results := solve(lines, m)
+	for _, val := range results {
+		fmt.Println(val)
+	}
 }
